@@ -1,0 +1,103 @@
+{% extends 'layouts/main.html' %}
+{% load static %}
+
+{% block css %}
+<style>
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+  } */
+  
+  .containers {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f1f1f1;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  input[type="submit"] {
+    background-color: #04AA6D;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #04AA6D;
+  }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="containers">
+    <h1>Registration Form</h1>
+    <form action=""  method="post">
+      {% csrf_token %}
+    <input type="text" name="username" placeholder="Username">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+    <!-- <input type="password" name="confirm_password" placeholder="Confirm Password"> -->
+    <input type="submit" value="Register">
+    </form>
+    {% if messages%}
+    {% for messages in messages %}
+      <h3 class="danger"> {{messages}}</h3>
+    {% endfor %}
+    {% endif %}
+    <p>Already have an account? <a href="{% url 'login'%}">Login</a></p>
+</div>
+
+{% block js %}
+
+<script>
+    // This function is called when the register button is clicked.
+function register() {
+  // Get the username, email, and password from the form.
+  var username = document.getElementById("username").value;
+  var email = document.getElementById("email").value;
+  var password = document.getElementById("password").value;
+  var confirm_password = document.getElementById("confirm_password").value;
+
+  // Validate the input.
+  if (username === "") {
+    alert("Please enter a username.");
+    return;
+  }
+
+  if (email === "") {
+    alert("Please enter an email address.");
+    return;
+  }
+
+  if (password === "") {
+    alert("Please enter a password.");
+    return;
+  }
+
+  if (confirm_password !== password) {
+    alert("The passwords do not match.");
+    return;
+  }
+
+  
+}
+
+</script>
+
+{% endblock js%}
+
+{% endblock %}
+
